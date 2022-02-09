@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {  useReducer } from "react";
+import { PhoneList } from "./components/PhoneList";
+import { PhoneContext } from "./context/PhoneContext";
+import { initialState, listReducer } from "./reducers/listReducer";
 
-function App() {
+
+
+
+
+
+
+function PhoneListApp() {
+
+  const [ state, dispatch ]= useReducer(listReducer, initialState);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Phone List Complex Version</h1>
+      <hr/>
+      <PhoneContext.Provider value={{
+                          state,
+                          dispatch
+      }}
+      >
+
+      <PhoneList />
+
+
+
+      </PhoneContext.Provider>
+
+
+
+
+    </>
   );
 }
 
-export default App;
+export default PhoneListApp;
